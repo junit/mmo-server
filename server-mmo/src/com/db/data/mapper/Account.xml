@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="account"> 
+  <resultMap id="bean" type="com.db.data.bean.AccountBean" >
+	<result column="server" property="server" jdbcType="INTEGER" />
+	<result column="createTime" property="createTime" jdbcType="BIGINT" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="id" property="id" jdbcType="BIGINT" />
+	<result column="platform" property="platform" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="select" resultMap="bean">
+  	select server,createTime,name,id,platform from account
+  </select>
+  
+  <insert id="insert" parameterType="com.db.data.bean.AccountBean">
+  	insert into account(server,createTime,name,id,platform)
+  	     values (#{server,jdbcType=INTEGER},#{createTime,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{id,jdbcType=BIGINT},#{platform,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="selectOne" resultMap="bean" parameterType="java.util.Map">
+  	select server,createTime,name,id,platform from account
+  	 where platform=#{platform,jdbcType=VARCHAR}
+  	   and server=#{server,jdbcType=INTEGER}
+  	   and name=#{name,jdbcType=VARCHAR}
+  </select>
+</mapper>

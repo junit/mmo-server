@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="role"> 
+  <resultMap id="bean" type="com.db.data.bean.RoleBean" >
+	<result column="data" property="data" jdbcType="BLOB" />
+	<result column="createTime" property="createTime" jdbcType="BIGINT" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="id" property="id" jdbcType="BIGINT" />
+	<result column="account" property="account" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <select id="select" resultMap="bean">
+  	select data,createTime,name,id,account from role
+  </select>
+  
+  <insert id="insert" parameterType="com.db.data.bean.RoleBean">
+  	insert into account(data,createTime,name,id,account)
+  	     values (#{data,jdbcType=BLOB},#{createTime,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{id,jdbcType=BIGINT},#{account,jdbcType=BIGINT})
+  </insert>
+  
+  <select id="selectByAccountId" resultMap="bean" parameterType="Long">
+  	select data,createTime,name,id,account from role where account=#{account,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectNames" resultType="String" parameterType="Long">
+  	select name from role
+  </select>
+</mapper>

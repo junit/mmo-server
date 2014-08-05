@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="map"> 
+  <resultMap id="bean" type="com.db.config.bean.MapBean" >
+	<result column="maxLine" property="maxLine" jdbcType="INTEGER" />
+	<result column="defaultLine" property="defaultLine" jdbcType="INTEGER" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="width" property="width" jdbcType="INTEGER" />
+	<result column="id" property="id" jdbcType="INTEGER" />
+	<result column="height" property="height" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="select" resultMap="bean">
+  	select maxLine,defaultLine,name,width,id,height from map
+  </select>
+  
+  <insert id="insert" parameterType="com.db.config.bean.MapBean">
+  	insert into account(maxLine,defaultLine,name,width,id,height)
+  	     values (#{maxLine,jdbcType=INTEGER},#{defaultLine,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{width,jdbcType=INTEGER},#{id,jdbcType=INTEGER},#{height,jdbcType=INTEGER})
+  </insert>
+</mapper>

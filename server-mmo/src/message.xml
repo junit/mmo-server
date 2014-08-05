@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <message id="100101" pkg="com.game.login" name="ReqLoginSelectRole"/>
+  <message id="100100" pkg="com.game.login" name="ReqLogin"/>
+  <message id="100102" pkg="com.game.login" name="ReqLoginCreateRole"/>
+</root>

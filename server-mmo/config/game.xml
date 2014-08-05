@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 游戏逻辑相关的配置 -->
+<root>
+	<servers>
+		<server id="1" opendate="2014-07-31 11:10:00" />
+		<server id="2" opendate="2014-07-31 15:10:00" />
+	</servers>
+	<protocols>
+		<protocol platfom="37wan" key="gasdgfdsgfdsgfd" />
+		<protocol platfom="360" key="gasdgfdsgfdsgfd" />
+		<protocol platfom="common" key="gasdgfdsgfdsgfd" />
+	</protocols>
+</root>

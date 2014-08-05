@@ -1,0 +1,17 @@
+package role;
+
+option java_package = "com.game.role.struct";
+option java_outer_classname = "RoleSaveData";
+
+message RoleMapData {
+	required int32 server = 1;
+	required int32 id = 2;
+	required int 32 line = 3;
+}
+
+message Role {
+	required int64 id = 1;
+	required string name = 2;
+	required int64 accountId = 3;
+	required int64 createTime = 4;
+}

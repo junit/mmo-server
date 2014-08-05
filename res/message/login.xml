@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.game.login" id="100">
+	<!-- bean定义 -->
+	<bean name="RoleBrief" note="角色简要信息">
+		<field class="long" name="roleId" note="角色id"></field>
+		<field class="String" name="name" note="角色名称"></field>
+	</bean>
+
+	<!-- 服务器发送消息 -->
+	<message id="100" type="CS" name="ReqLogin" note="登录">
+		<field class="String" name="accountName" note="账号"></field>
+		<field class="String" name="protocol" note="协议"></field>
+		<field class="String" name="platform" note="平台"></field>
+		<field class="int" name="server" note="服务器"></field>
+	</message>
+	
+	<message id="101" type="CS" name="ReqLoginSelectRole" note="选择角色进入游戏">
+		<field class="long" name="roleId" note="角色id"></field>
+	</message>
+	
+	<message id="102" type="CS" name="ReqLoginCreateRole" note="创建角色">
+		<field class="String" name="name" note="角色名称"></field>
+	</message>
+
+	<!-- 服务器接收消息 -->
+	<message id="200" type="SC" name="ResLogin" note="登录">
+		<field class="byte" name="ret" note="返回值"></field>
+		<list class="RoleBrief" name="roles" note="角色信息"></list>
+	</message>
+	
+	<message id="201" type="SC" name="ResLoginCreateRole" note="创建角色">
+		<field class="byte" name="ret" note="返回值"></field>
+		<list class="RoleBrief" name="roles" note="角色信息"></list>
+	</message>
+</messages>

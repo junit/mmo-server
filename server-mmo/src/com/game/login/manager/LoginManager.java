@@ -13,6 +13,7 @@ import com.game.login.struct.LoginState;
 import com.game.role.struct.Role;
 import com.manager.Manager;
 import com.manager.ManagerPool;
+import com.manager.PriorityEnum;
 import com.message.util.MessageUtil;
 
 public class LoginManager extends Manager {
@@ -22,6 +23,11 @@ public class LoginManager extends Manager {
 	@Override
 	public boolean init() {
 		return true;
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.NORMAL;
 	}
 
 	@Override
@@ -42,6 +48,7 @@ public class LoginManager extends Manager {
 			account = ManagerPool.account.createAccount(message.getPlatform(), message.getServer(), message.getAccountName());
 		}
 
+		account.setLoginTime(System.currentTimeMillis());
 		List<Role> roles = ManagerPool.role.getRoleByAccountId(account.getId());
 
 		ResLoginMessage ret = new ResLoginMessage();
@@ -58,5 +65,9 @@ public class LoginManager extends Manager {
 		MessageUtil.send(context, ret);
 
 		ManagerPool.loginState.change(context, LoginState.LOGIN_END);
+	}
+
+	public void login(Account account) {
+		ManagerPool.map.login(account);
 	}
 }

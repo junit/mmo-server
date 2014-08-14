@@ -27,7 +27,7 @@ public class ${name} extends Bean {
 	<#list fields as field>
 	<#if field.listFlag==1>
 	//${field.note}
-	private List<${.globals[field.clazz]!field.clazz}> ${field.name} = new ArrayList<${.globals[field.clazz]!field.clazz}>();
+	private List<${field.clazz?cap_first}> ${field.name} = new ArrayList<>();
 	<#else>
 	//${field.note}
 	private ${field.clazz} ${field.name};
@@ -145,14 +145,14 @@ public class ${name} extends Bean {
 	 * get ${field.note}
 	 * @return 
 	 */
-	public List<${.globals[field.clazz]!field.clazz}> get${field.name?cap_first}(){
+	public List<${field.clazz?cap_first}> get${field.name?cap_first}(){
 		return ${field.name};
 	}
 	
 	/**
 	 * set ${field.note}
 	 */
-	public void set${field.name?cap_first}(List<${.globals[field.clazz]!field.clazz}> ${field.name}){
+	public void set${field.name?cap_first}(List<${field.clazz?cap_first}> ${field.name}){
 		this.${field.name} = ${field.name};
 	}
 	

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<java-client path="E:\\workplace\\person code\\robot-mmo\\src" />
-	<java-server path="E:\\workplace\\person code\\server-mmo\\src" />
-	<as path="E:\\workplace\\person code\\res\\message\\as" />
+	<java-client path="E:\\workplace\\person code\\mmo-server\\robot-mmo\\src" />
+	<java-server path="E:\\workplace\\person code\\mmo-server\\server-mmo\\src" />
+	<as path="E:\\workplace\\person code\\mmo-server\\res\\message\\as" />
 	
-	<message path="E:\\workplace\\person code\\res\\message" />
+	<message path="E:\\workplace\\person code\\mmo-server\\res\\message" />
 	
 	<db-config url="jdbc:mysql://192.168.1.120:3307/shell_config" usr="game" pwd="game"/>
 	<db-data url="jdbc:mysql://192.168.1.120:3307/shell_data" usr="game" pwd="game"/>

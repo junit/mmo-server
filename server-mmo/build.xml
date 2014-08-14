@@ -22,8 +22,8 @@
 	</pathconvert>
 
 	<target name="remove">
-		<delete dir="${buildclass.dir}"/>
-		<delete file="${jarfile}"/>
+		<delete dir="${buildclass.dir}" />
+		<delete file="${jarfile}" />
 	</target>
 	<target name="build" depends="remove">
 		<echo message="开始构建目录" />
@@ -38,9 +38,12 @@
 			<classpath refid="classpath" />
 		</javac>
 		<echo message="编译结束" />
-		<copy file="${src.dir}/log4j.xml" tofile="${buildclass.dir}/log4j.xml"/>
+		<copy file="${src.dir}/log4j.xml" tofile="${buildclass.dir}/log4j.xml" />
 		<copy todir="${buildclass.dir}/com/db/data/mapper">
-			<fileset dir="${src.dir}/com/db/data/mapper"/>
+			<fileset dir="${src.dir}/com/db/data/mapper" />
+		</copy>
+		<copy todir="${buildclass.dir}/com/db/config/mapper">
+			<fileset dir="${src.dir}/com/db/config/mapper" />
 		</copy>
 	</target>
 	<target name="jar" depends="build">

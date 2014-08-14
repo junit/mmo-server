@@ -21,7 +21,7 @@
     </environments>
     <mappers>
     	<#list names as name>
-		<mapper resource="${path}\${name}"/>
+		<mapper resource="${path}/${name}"/>
 		</#list>
     </mappers>
 

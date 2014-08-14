@@ -22,7 +22,7 @@ public class Config implements IFtl {
 		map.put("url", url);
 		map.put("usr", usr);
 		map.put("pwd", pwd);
-		map.put("path", "com\\db\\" + type + "\\mapper");
+		map.put("path", "com/db/" + type + "/mapper");
 		map.put("names", names);
 		return map;
 	}

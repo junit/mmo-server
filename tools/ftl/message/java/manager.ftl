@@ -1,6 +1,6 @@
-package com.game.message.manager;
+package com.message.manager;
 
-import com.game.manager.Manager;
+import com.manager.Manager;
 import com.game.message.MessagePool;
 
 public class MessageManager extends Manager {

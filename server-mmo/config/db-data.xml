@@ -20,8 +20,8 @@
         </environment>
     </environments>
     <mappers>
-		<mapper resource="com\db\data\mapper\Account.xml"/>
-		<mapper resource="com\db\data\mapper\Role.xml"/>
+		<mapper resource="com/db/data/mapper/Account.xml"/>
+		<mapper resource="com/db/data/mapper/Role.xml"/>
     </mappers>
 
 </configuration>

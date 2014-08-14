@@ -7,4 +7,5 @@ public abstract class Manager {
 	
 	public abstract boolean init();
 	public abstract void stop();
+	public abstract PriorityEnum getPriority();
 }

@@ -11,7 +11,6 @@ import com.manager.ManagerPool;
 
 public class RoleCache {
 	private ConcurrentHashMap<Long, ConcurrentHashMap<Long, Role>> roles = new ConcurrentHashMap<>();
-	private RoleDao dao = new RoleDao();
 
 	public List<Role> getRoleByAccountId(long accountId) {
 		ConcurrentHashMap<Long, Role> map = roles.get(accountId);
@@ -22,7 +21,7 @@ public class RoleCache {
 	}
 
 	public List<Role> getRoleByAccountIdFromDb(long accountId) {
-		List<RoleBean> beans = dao.selectByAccountId(accountId);
+		List<RoleBean> beans = RoleDao.getInstance().selectByAccountId(accountId);
 		
 		if (beans == null || beans.isEmpty()) {
 			return null;

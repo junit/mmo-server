@@ -20,7 +20,7 @@
         </environment>
     </environments>
     <mappers>
-		<mapper resource="com\db\config\mapper\Map.xml"/>
+		<mapper resource="com/db/config/mapper/Map.xml"/>
     </mappers>
 
 </configuration>

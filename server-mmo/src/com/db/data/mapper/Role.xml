@@ -16,7 +16,7 @@
   </select>
   
   <insert id="insert" parameterType="com.db.data.bean.RoleBean">
-  	insert into account(data,createTime,name,id,account)
+  	insert into role(data,createTime,name,id,account)
   	     values (#{data,jdbcType=BLOB},#{createTime,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{id,jdbcType=BIGINT},#{account,jdbcType=BIGINT})
   </insert>
   
@@ -27,4 +27,13 @@
   <select id="selectNames" resultType="String" parameterType="Long">
   	select name from role
   </select>
+  
+  <update id="update" parameterType="com.db.data.bean.RoleBean">
+  	update role
+  	   set data=#{data,jdbcType=BLOB},
+  	       createTime=#{createTime,jdbcType=BIGINT},
+  	       name=#{name,jdbcType=VARCHAR},
+  	       account=#{account,jdbcType=BIGINT}
+  	 where id=#{id,jdbcType=BIGINT}
+  </update>
 </mapper>

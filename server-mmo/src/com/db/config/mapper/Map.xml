@@ -17,7 +17,7 @@
   </select>
   
   <insert id="insert" parameterType="com.db.config.bean.MapBean">
-  	insert into account(maxLine,defaultLine,name,width,id,height)
+  	insert into role(maxLine,defaultLine,name,width,id,height)
   	     values (#{maxLine,jdbcType=INTEGER},#{defaultLine,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{width,jdbcType=INTEGER},#{id,jdbcType=INTEGER},#{height,jdbcType=INTEGER})
   </insert>
 </mapper>

@@ -1,5 +1,6 @@
 package com.manager;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
@@ -28,13 +29,21 @@ public class ManagerPool {
 	public static DbConfigManager dbConfig = new DbConfigManager();
 	public static NameManager name = new NameManager();
 	
-	private static HashSet<Manager> managers;
+	private static HashMap<PriorityEnum, HashSet<Manager>> managers;
 	private static Logger logger = Logger.getLogger(ManagerPool.class);
 	public static boolean init() {
 		if (managers == null) {
 			return true;
 		}
-		for (Manager manager : managers) {
+		for (Manager manager : managers.get(PriorityEnum.BASE)) {
+			if (!manager.init()) {
+				logger.error(manager.getClass().getName() + "初始化失败");
+				return false;
+			}
+			logger.error(manager.getClass().getName() + "初始化完成");
+		}
+		
+		for (Manager manager : managers.get(PriorityEnum.NORMAL)) {
 			if (!manager.init()) {
 				logger.error(manager.getClass().getName() + "初始化失败");
 				return false;
@@ -46,13 +55,21 @@ public class ManagerPool {
 	
 	public static void regist(Manager manager) {
 		if (managers == null) {
-			managers = new HashSet<>();
+			managers = new HashMap<>();
 		}
-		managers.add(manager);
+		HashSet<Manager> map = managers.get(manager.getPriority());
+		if (map == null) {
+			map = new HashSet<>();
+			managers.put(manager.getPriority(), map);
+		}
+		map.add(manager);
 	}
 	
 	public static void stop() {
-		for (Manager manager : managers) {
+		for (Manager manager : managers.get(PriorityEnum.NORMAL)) {
+			manager.stop();
+		}
+		for (Manager manager : managers.get(PriorityEnum.BASE)) {
 			manager.stop();
 		}
 	}

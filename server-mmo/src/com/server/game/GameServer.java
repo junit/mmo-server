@@ -1,5 +1,7 @@
 package com.server.game;
 
+import org.apache.log4j.Logger;
+
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 
@@ -9,6 +11,7 @@ import com.game.netty.coder.Encoder;
 import com.manager.ManagerPool;
 
 public class GameServer extends Server {
+	private static Logger logger = Logger.getLogger(GameServer.class);
 	private static GameServer instance = new GameServer();
 	private GameServer() {}
 	public static GameServer getInstance() {
@@ -22,6 +25,7 @@ public class GameServer extends Server {
 
 	@Override
 	public void stop() {
+		logger.error("关闭GameServer");
 		ManagerPool.stop();
 	}
 

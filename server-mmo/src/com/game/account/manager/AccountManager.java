@@ -4,12 +4,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 
 import com.db.data.bean.AccountBean;
+import com.db.data.dao.AccountDao;
 import com.game.account.cache.AccountCache;
 import com.game.account.struct.Account;
-import com.game.account.struct.AccountInsertThread;
+import com.game.thread.queue.ITask;
 import com.game.util.IdGenerator;
 import com.manager.Manager;
 import com.manager.ManagerPool;
+import com.manager.PriorityEnum;
 import com.message.util.MessageUtil;
 
 public class AccountManager extends Manager {
@@ -22,9 +24,12 @@ public class AccountManager extends Manager {
 
 	@Override
 	public void stop() {
-		// 1.断开连接
-		// 2.保存数据
-		// TODO 保存账号
+		cache.saveAll();
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.NORMAL;
 	}
 
 	/**
@@ -80,7 +85,23 @@ public class AccountManager extends Manager {
 	}
 
 	private void insert(Account account) {
-		ManagerPool.thread.getDbExcutor().execute(new AccountInsertThread(createAccountBean(account)));
+		ManagerPool.thread.getDbThread().addTask(new ITask() {
+			final AccountBean bean = createAccountBean(account);
+			@Override
+			public void exec() {
+				AccountDao.getInstance().insert(bean);
+			}
+		});
+	}
+	
+	public void update(Account account) {
+		ManagerPool.thread.getDbThread().addTask((new ITask() {
+			final AccountBean bean = createAccountBean(account);
+			@Override
+			public void exec() {
+				AccountDao.getInstance().update(bean);
+			}
+		}));
 	}
 
 	private static final String ACCOUNT = "ACCOUNT";
@@ -128,6 +149,7 @@ public class AccountManager extends Manager {
 		return bean;
 	}
 
-	public void onOffline(Account account2) {
+	public void onOffline(Account account) {
+		account.setOffLineTime(System.currentTimeMillis());
 	}
 }

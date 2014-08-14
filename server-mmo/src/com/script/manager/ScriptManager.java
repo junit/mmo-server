@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.game.script.ScriptLoader;
 import com.game.script.struct.IScript;
 import com.manager.Manager;
+import com.manager.PriorityEnum;
 
 
 public class ScriptManager extends Manager {
@@ -25,6 +26,11 @@ public class ScriptManager extends Manager {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.BASE;
 	}
 	
 	public IScript getScript(int id) {

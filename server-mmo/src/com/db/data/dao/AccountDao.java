@@ -10,6 +10,12 @@ import com.db.DbFactory;
 import com.db.data.bean.AccountBean;
 
 public class AccountDao {
+	private AccountDao() {}
+	private static AccountDao instance = new AccountDao();
+	public static AccountDao getInstance() {
+		return instance;
+	}
+	
 	SqlSessionFactory factory = DbFactory.getInstance().getDataFactory();
 
 	public List<AccountBean> select() {
@@ -19,7 +25,7 @@ public class AccountDao {
         	List<AccountBean> list = session.selectList("account.select");
         	long interval = System.currentTimeMillis() - s;
 			if (interval > 10) {
-				com.logger.DbLogger.logger.error(new StringBuilder().append("AccountDao.").append("select:").append(interval));
+				com.logger.GlobalLogger.db.error(new StringBuilder().append("AccountDao.").append("select:").append(interval));
 			}
             return list;
     	}finally{
@@ -32,9 +38,10 @@ public class AccountDao {
         SqlSession session = factory.openSession();
         try{
         	session.insert("account.insert", bean);
+        	session.commit();
         	long interval = System.currentTimeMillis() - s;
 			if (interval > 10) {
-				com.logger.DbLogger.logger.error(new StringBuilder().append("AccountDao.").append("select:").append(interval));
+				com.logger.GlobalLogger.db.error(new StringBuilder().append("AccountDao.").append("insert:").append(interval));
 			}
     	}finally{
 			session.close();
@@ -52,9 +59,24 @@ public class AccountDao {
         	AccountBean bean = session.selectOne("account.selectOne", map);
         	long interval = System.currentTimeMillis() - s;
 			if (interval > 10) {
-				com.logger.DbLogger.logger.error(new StringBuilder().append("AccountDao.").append("selectOne:").append(interval));
+				com.logger.GlobalLogger.db.error(new StringBuilder().append("AccountDao.").append("selectOne:").append(interval));
 			}
             return bean;
+    	}finally{
+			session.close();
+		}
+	}
+
+	public void update(AccountBean bean) {
+		long s = System.currentTimeMillis();
+        SqlSession session = factory.openSession();
+        try{
+        	session.update("account.update", bean);
+        	session.commit();
+        	long interval = System.currentTimeMillis() - s;
+			if (interval > 10) {
+				com.logger.GlobalLogger.db.error(new StringBuilder().append("AccountDao.").append("update:").append(interval));
+			}
     	}finally{
 			session.close();
 		}

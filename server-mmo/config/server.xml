@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- 服务器参数配置 -->
 <root>
-	<gameserver port="5241" />
+	<gameserver port="5241"/>
 </root>

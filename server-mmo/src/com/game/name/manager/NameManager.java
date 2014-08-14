@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import com.db.data.dao.RoleDao;
 import com.manager.Manager;
+import com.manager.PriorityEnum;
 
 public class NameManager extends Manager {
 	private HashSet<String> names = new HashSet<>(); // 角色名称,帮会名称等
@@ -12,14 +13,18 @@ public class NameManager extends Manager {
 	@Override
 	public boolean init() {
 		{
-			RoleDao dao = new RoleDao();
-			names.addAll(dao.selectNames());
+			names.addAll(RoleDao.getInstance().selectNames());
 		}
 		return true;
 	}
 
 	@Override
 	public void stop() {
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.NORMAL;
 	}
 
 	public boolean isRepeat(String name, boolean insert) {

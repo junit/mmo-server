@@ -23,4 +23,9 @@ public class TimeUtil {
 			return null;
 		}
 	}
+	
+	public static String getStringDate(Date date, String format) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(date);
+	}
 }

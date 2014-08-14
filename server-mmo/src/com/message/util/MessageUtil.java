@@ -3,12 +3,14 @@ package com.message.util;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
 import com.game.account.struct.Account;
 import com.game.message.struct.Message;
 import com.game.role.struct.Role;
+import com.manager.ManagerPool;
 
 public class MessageUtil {
 	private static Logger logger = Logger.getLogger(MessageUtil.class);
@@ -39,5 +41,12 @@ public class MessageUtil {
 	
 	public static void send(ChannelHandlerContext context, Message msg) {
 		context.writeAndFlush(msg);
+	}
+	
+	public static void sendRound(Role role, Message msg) {
+		HashSet<Role> roles = ManagerPool.map.getRoundRole(role);
+		for (Role tmp : roles) {
+			send(tmp, msg);
+		}
 	}
 }

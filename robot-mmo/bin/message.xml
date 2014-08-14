@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <message id="100201" pkg="com.game.login" name="ResLoginCreateRole"/>
+  <message id="100200" pkg="com.game.login" name="ResLogin"/>
+</root>

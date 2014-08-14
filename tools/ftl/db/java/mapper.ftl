@@ -14,7 +14,7 @@
   </select>
   
   <insert id="insert" parameterType="com.db.${type}.bean.${name?cap_first}Bean">
-  	insert into account(<#list fields as field><#if field_has_next>${field.name},<#else>${field.name}</#if></#list>)
+  	insert into ${name}(<#list fields as field><#if field_has_next>${field.name},<#else>${field.name}</#if></#list>)
   	     values (<#list fields as field><#if field_has_next>${"#"}{${field.name},jdbcType=${field.dbType}},<#else>${"#"}{${field.name},jdbcType=${field.dbType}}</#if></#list>)
   </insert>
 </mapper>

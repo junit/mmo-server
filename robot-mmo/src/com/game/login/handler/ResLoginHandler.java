@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.game.login.message.ReqLoginCreateRoleMessage;
 import com.game.message.struct.Handler;
+import com.game.util.IdGenerator;
 
 public class ResLoginHandler extends Handler{
 	private static Logger logger = Logger.getLogger(ResLoginHandler.class);
@@ -26,7 +27,7 @@ public class ResLoginHandler extends Handler{
         }
         
         ReqLoginCreateRoleMessage ret = new ReqLoginCreateRoleMessage();
-        ret.setName("shell");
+        ret.setName("shell" + IdGenerator.getId(1));
         this.getContext().writeAndFlush(ret);
     }
 }

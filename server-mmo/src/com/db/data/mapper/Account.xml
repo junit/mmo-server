@@ -26,4 +26,13 @@
   	   and server=#{server,jdbcType=INTEGER}
   	   and name=#{name,jdbcType=VARCHAR}
   </select>
+  
+  <update id="update" parameterType="com.db.data.bean.AccountBean">
+  	update account
+  	   set server=#{server,jdbcType=INTEGER},
+  	       createTime=#{createTime,jdbcType=BIGINT},
+  	       name=#{name,jdbcType=VARCHAR},
+  	       platform=#{platform,jdbcType=VARCHAR}
+  	 where id=#{id,jdbcType=BIGINT}
+  </update>
 </mapper>

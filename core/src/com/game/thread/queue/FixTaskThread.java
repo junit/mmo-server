@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 public class FixTaskThread extends Thread {
 	private Logger logger;
 	private LinkedBlockingQueue<ITask> tasks;
+	private boolean stopFlag = false;
 
 	public FixTaskThread(String name, int size) {
 		super(name);
@@ -16,7 +17,7 @@ public class FixTaskThread extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (!stopFlag) {
 			ITask task = tasks.poll();
 			if (task == null) {
 				try {
@@ -41,11 +42,25 @@ public class FixTaskThread extends Thread {
 		try {
 			tasks.add(task);
 			synchronized (this) {
-					notify();
+				notify();
 			}
 		} catch (Exception e) {
 			logger.error(e, e);
 		}
+	}
+	
+	public void onStop() {
+		logger.error(getName() + "关闭..." + tasks.size());
+		stopFlag = true;
+		for (ITask task = tasks.poll(); task != null; task = tasks.poll()) {
+			long s = System.currentTimeMillis();
+			task.exec();
+			long interval = System.currentTimeMillis() - s;
+			if (s > 10) {
+				logger.error(task.getClass().getName() + ":" + interval);
+			}
+		}
+		logger.error(getName() + "关闭");
 	}
 
 	public static void main(String[] args) throws Exception {

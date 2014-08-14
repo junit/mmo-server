@@ -44,7 +44,7 @@ public class Handler implements IFtl {
 
 	@Override
 	public String getDstPath(LanguageEnum language) {
-		String path = StringUtil.join(Config.getInstance().getPath(language), File.separator, pkg, File.separator, name);
+		String path = StringUtil.join(Config.getInstance().getPath(language), File.separator, pkg, File.separator, "handler", File.separator, name);
 		return StringUtil.join(path.replace(".", File.separator), "Handler.java");
 	
 	}

@@ -5,6 +5,7 @@ public class RoleMapData {
 	private int model;
 	private int line;
 	private long id;
+	private Position position = new Position();
 	public int getServer() {
 		return server;
 	}
@@ -28,5 +29,11 @@ public class RoleMapData {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public Position getPosition() {
+		return position;
+	}
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 }

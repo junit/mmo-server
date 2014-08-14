@@ -14,6 +14,8 @@ public class Account {
 	private HashMap<Long, Role> roles = new HashMap<>();
 	private Role role; // 当前游戏的角色
 	private boolean online = true; // 在线标志
+	private long offLineTime;
+	private long loginTime;
 	
 	public boolean isOnline() {
 		return online;
@@ -62,5 +64,17 @@ public class Account {
 	}
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
+	}
+	public long getOffLineTime() {
+		return offLineTime;
+	}
+	public void setOffLineTime(long offLineTime) {
+		this.offLineTime = offLineTime;
+	}
+	public long getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(long loginTime) {
+		this.loginTime = loginTime;
 	}
 }

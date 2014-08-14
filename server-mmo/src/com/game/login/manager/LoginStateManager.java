@@ -5,6 +5,7 @@ import io.netty.util.AttributeKey;
 
 import com.game.login.struct.LoginState;
 import com.manager.Manager;
+import com.manager.PriorityEnum;
 
 public class LoginStateManager extends Manager {
 	private static final String LOGIN_STATE = "LOGIN_STATE";
@@ -12,6 +13,11 @@ public class LoginStateManager extends Manager {
 	@Override
 	public boolean init() {
 		return true;
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.NORMAL;
 	}
 
 	@Override

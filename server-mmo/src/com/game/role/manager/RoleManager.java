@@ -5,16 +5,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.db.data.bean.RoleBean;
+import com.db.data.dao.RoleDao;
 import com.game.account.struct.Account;
 import com.game.role.cache.RoleCache;
 import com.game.role.struct.Role;
-import com.game.role.struct.RoleInsertThread;
 import com.game.role.struct.RoleSaveData;
 import com.game.role.struct.RoleSaveData.Role.Builder;
+import com.game.thread.queue.ITask;
 import com.game.util.IdGenerator;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.manager.Manager;
 import com.manager.ManagerPool;
+import com.manager.PriorityEnum;
 
 public class RoleManager extends Manager {
 	private static Logger logger = Logger.getLogger(RoleManager.class);
@@ -27,6 +29,11 @@ public class RoleManager extends Manager {
 
 	@Override
 	public void stop() {
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.NORMAL;
 	}
 
 	/**
@@ -70,10 +77,16 @@ public class RoleManager extends Manager {
 	}
 
 	private void insert(Role role) {
-		ManagerPool.thread.getDbExcutor().execute(new RoleInsertThread(createBean(role)));
+		ManagerPool.thread.getDbThread().addTask(new ITask() {
+			final RoleBean bean = createBean(role);
+			@Override
+			public void exec() {
+				RoleDao.getInstance().insert(bean);
+			}
+		});
 	}
 
-	private RoleBean createBean(Role role) {
+	public RoleBean createBean(Role role) {
 		Builder builder = RoleSaveData.Role.newBuilder();
 		builder.setId(role.getId());
 		builder.setAccountId(role.getAccountId());
@@ -113,6 +126,16 @@ public class RoleManager extends Manager {
 		role.setName(roleData.getName());
 		role.setCreateTime(roleData.getCreateTime());
 		return role;
+	}
+
+	public void update(Role role) {
+		ManagerPool.thread.getDbThread().addTask(new ITask() {
+			final RoleBean bean = createBean(role);
+			@Override
+			public void exec() {
+				RoleDao.getInstance().update(bean);
+			}
+		});
 	}
 
 }

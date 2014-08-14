@@ -3,6 +3,7 @@ package com.config.manager;
 import com.config.struct.GameConfig;
 import com.config.struct.ServerConfig;
 import com.manager.Manager;
+import com.manager.PriorityEnum;
 
 public class ConfigManager extends Manager {
 	private GameConfig gameCofnig = new GameConfig();
@@ -39,5 +40,10 @@ public class ConfigManager extends Manager {
 
 	@Override
 	public void stop() {
+	}
+	
+	@Override
+	public PriorityEnum getPriority() {
+		return PriorityEnum.BASE;
 	}
 }

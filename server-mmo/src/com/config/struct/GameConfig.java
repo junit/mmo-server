@@ -114,5 +114,4 @@ public class GameConfig {
 	public Collection<Integer> getServers() {
 		return servers.keySet();
 	}
-
 }
